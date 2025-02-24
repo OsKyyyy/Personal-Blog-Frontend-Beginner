@@ -1,9 +1,10 @@
-import bg1Image from '../assets/images/bg_1.jpg';
+import bg1Image from '../../../assets/main/images/bg_1.jpg';
+import {Link} from "react-router-dom";
 
 const CounterSection = () => {
 
     return (
-        <>
+        <div className='mt-5 py-5'>
             <section className="ftco-section ftco-no-pt ftco-no-pb ftco-counter img" id="section-counter">
                 <div className="container">
                     <div className="row d-md-flex align-items-center">
@@ -11,7 +12,7 @@ const CounterSection = () => {
                             <div className="block-18">
                                 <div className="text">
                                     <strong className="number" data-number="100">0</strong>
-                                    <span>Awards</span>
+                                    <span>Ödüller</span>
                                 </div>
                             </div>
                         </div>
@@ -19,7 +20,7 @@ const CounterSection = () => {
                             <div className="block-18">
                                 <div className="text">
                                     <strong className="number" data-number="1200">0</strong>
-                                    <span>Complete Projects</span>
+                                    <span>Tamamlanan Projeler</span>
                                 </div>
                             </div>
                         </div>
@@ -27,7 +28,7 @@ const CounterSection = () => {
                             <div className="block-18">
                                 <div className="text">
                                     <strong className="number" data-number="1200">0</strong>
-                                    <span>Happy Customers</span>
+                                    <span>Mutlu Müşteriler</span>
                                 </div>
                             </div>
                         </div>
@@ -35,7 +36,7 @@ const CounterSection = () => {
                             <div className="block-18">
                                 <div className="text">
                                     <strong className="number" data-number="500">0</strong>
-                                    <span>Cups of coffee</span>
+                                    <span>Kahve Hediye Edenler</span>
                                 </div>
                             </div>
                         </div>
@@ -46,14 +47,13 @@ const CounterSection = () => {
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-md-7 text-center">
-                            <h2>I'm <span>Available</span> for freelancing</h2>
-                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                            <p className="mb-0"><a href="#" className="btn btn-primary py-3 px-5">Hire me</a></p>
+                            <h2>Freelance çalışmaya <span>Hazırım</span></h2>
+                            <p>Projelerinize esneklik ve uzmanlık katmak için buradayım. Web geliştirme, otomasyon sistemleri ve özelleştirilmiş yazılım çözümleri konusunda destek almak için benimle iletişime geçin!.</p>
                         </div>
                     </div>
                 </div>
             </section>
-        </>
+        </div>
     )
 }
 

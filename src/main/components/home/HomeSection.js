@@ -1,5 +1,6 @@
-import bg1Image from '../assets/images/bg_1.png';
-import bg2Image from '../assets/images/bg_2.png';
+import bg1Image from '../../../assets/main/images/bg_1.png';
+import bg2Image from '../../../assets/main/images/bg_2.png';
+import {Link} from "react-router-dom";
 
 const HomeSection = () => {
     return (
@@ -17,12 +18,11 @@ const HomeSection = () => {
                             <div className="one-forth d-flex  align-items-center"
                                  data-scrollax=" properties: { translateY: '70%' }">
                                 <div className="text">
-                                    <span className="subheading">Hello!</span>
-                                    <h1 className="mb-4 mt-3">I'm <span>Clark Thompson</span></h1>
-                                    <h2 className="mb-4">A Freelance Web Designer</h2>
+                                    <span className="subheading">Merhaba!</span>
+                                    <h1 className="mb-4 mt-3">Ben <span>Oğuzhan</span></h1>
+                                    <h2 className="mb-4">Yazılım Geliştiricisi</h2>
                                     <p>
-                                        <a href="#" className="btn btn-primary py-3 px-4">Hire me</a>
-                                        <a href="#" className="btn btn-white btn-outline-white py-3 px-4">My works</a>
+                                        <Link to='/contact' className="btn btn-primary py-3 px-4">İletişime Geç</Link>
                                     </p>
                                 </div>
                             </div>
@@ -42,11 +42,10 @@ const HomeSection = () => {
                             <div className="one-forth d-flex align-items-center "
                                  data-scrollax=" properties: { translateY: '70%' }">
                                 <div className="text">
-                                    <span className="subheading">Hello!</span>
-                                    <h1 className="mb-4 mt-3">I'm a <span>web designer</span> based in London</h1>
+                                    <span className="subheading">Merhaba!</span>
+                                    <h1 className="mb-4 mt-3">Web üzerinde <span>yazılım</span> yapıyorum</h1>
                                     <p>
-                                        <a href="#" className="btn btn-primary py-3 px-4">Hire me</a>
-                                        <a href="#" className="btn btn-white btn-outline-white py-3 px-4">My works</a>
+                                        <Link to='/projects' className="btn btn-primary py-3 px-4">Projelerim</Link>
                                     </p>
                                 </div>
                             </div>
