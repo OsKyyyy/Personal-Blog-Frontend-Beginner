@@ -1,6 +1,33 @@
+import {useSelector} from "react-redux";
 import aboutImage from '../../../assets/main/images/about.jpg';
+import {useForm} from "react-hook-form";
+import useFetch from "../../../hooks/useFetch";
 
 const ContactSection = () => {
+
+    const apiUrl = useSelector((state) => state.global.ApiUrl);
+    const { fetchData } = useFetch();
+    const { register, handleSubmit, setValue, trigger, formState: { errors } } = useForm();
+
+    const handleContactAdd = async (data) => {
+
+        const name = data.name;
+        const email = data.email;
+        const subject = data.subject;
+        const message = data.message;
+
+        const contactAddUrl = apiUrl + "/Contact/Add";
+        const contactAddOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            data: JSON.stringify({name:name, email:email, subject:subject, message:message}),
+            showToast: true,
+            loadComponent: "contact"
+        };
+
+        fetchData(contactAddUrl, contactAddOptions);
+    }
+
     return (
         <section className="ftco-section contact-section ftco-no-pb" id="contact-section">
             <div className="container">
@@ -53,18 +80,50 @@ const ContactSection = () => {
 
                 <div className="row no-gutters block-9">
                     <div className="col-md-6 order-md-last d-flex">
-                        <form action="#" className="bg-light p-4 p-md-5 contact-form">
+                        <form className="bg-light p-4 p-md-5 contact-form" onSubmit={handleSubmit(handleContactAdd)}>
                             <div className="form-group">
-                                <input type="text" className="form-control" placeholder="İsim Soyisim"/>
+                                <input type="text"
+                                       className="form-control"
+                                       placeholder="İsim Soyisim"
+                                       {...register('name', {
+                                           required: 'İsim Soyisim gereklidir'
+                                       })}
+                                />
+                                {errors.name &&
+                                    <span style={{color: "red"}}>{errors.name.message}</span>}
                             </div>
                             <div className="form-group">
-                                <input type="text" className="form-control" placeholder="E-Posta Adresi"/>
+                                <input type="text"
+                                       className="form-control"
+                                       placeholder="E-Posta Adresi"
+                                       {...register('email', {
+                                           required: 'E-Posta gereklidir'
+                                       })}
+                                />
+                                {errors.email &&
+                                    <span style={{color: "red"}}>{errors.email.message}</span>}
                             </div>
                             <div className="form-group">
-                                <input type="text" className="form-control" placeholder="Konu"/>
+                                <input type="text"
+                                       className="form-control"
+                                       placeholder="Konu"
+                                       {...register('subject', {
+                                           required: 'Konu gereklidir'
+                                       })}
+                                />
+                                {errors.subject &&
+                                    <span style={{color: "red"}}>{errors.subject.message}</span>}
                             </div>
                             <div className="form-group">
-                                <textarea name="" id="" cols="30" rows="7" className="form-control" placeholder="Mesaj"></textarea>
+                                <textarea name="" id="" cols="30" rows="7"
+                                          className="form-control"
+                                          placeholder="Mesaj"
+                                          {...register('message', {
+                                              required: 'Mesaj gereklidir'
+                                          })}
+                                />
+                                {errors.message &&
+                                    <span style={{color: "red"}}>{errors.message.message}</span>}
                             </div>
                             <div className="form-group">
                                 <input type="submit" value="Gönder" className="btn btn-primary py-3 px-5"/>

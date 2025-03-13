@@ -1,6 +1,8 @@
 const storedToken = localStorage.getItem("token");
 
 const initialState = {
+    ImageUrl: 'http://localhost:9090',
+    ApiUrl: 'https://localhost:44352/api',
     jQuery: window.$,
     user: null,
     token: storedToken || null,

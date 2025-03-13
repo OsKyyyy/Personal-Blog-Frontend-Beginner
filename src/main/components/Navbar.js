@@ -30,11 +30,6 @@ function Navbar() {
                             </NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink activeClassName="active" className="nav-link" to={'/projects'}>
-                                <span>Projeler</span>
-                            </NavLink>
-                        </li>
-                        <li className="nav-item">
                             <NavLink activeClassName="active" className="nav-link" to={'/blog'}>
                                 <span>Blog</span>
                             </NavLink>

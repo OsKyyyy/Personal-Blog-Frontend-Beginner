@@ -5,17 +5,38 @@ import {useForm} from "react-hook-form";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {useSelector} from "react-redux";
+import {useParams} from "react-router";
 
-const BlogAdd = () => {
+const BlogEdit = () => {
 
+    let { id } = useParams();
     const callbackRef = useRef(null);
     const editorRef = useRef(null);
     const [content, setContent] = useState("");
     const [imageUrls, setImageUrls] = useState([]);
     const { register, handleSubmit, setValue, trigger, formState: { errors } } = useForm();
     const { data, fetchData } = useFetch();
+    const { data: dataList, fetchData: fetchList } = useFetch();
     const apiUrl = useSelector((state) => state.global.ApiUrl);
     const imageUrl = useSelector((state) => state.global.ImageUrl);
+
+    useEffect(() => {
+        const listUrl = apiUrl + "/Blog/ListById?id=" + id;
+        fetchList(listUrl);
+    }, []);
+
+    useEffect(() => {
+        if (dataList?.Status) {
+            setValue("title", dataList.Data.Title);
+            setContent(dataList.Data.Content);
+
+            const tagsString = dataList.Data.Tags
+                .map(tag => tag.Name)
+                .join(", ");
+
+            setValue("tags", tagsString);
+        }
+    }, [dataList]);
 
     useEffect(() => {
         setValue("content", "");
@@ -75,21 +96,22 @@ const BlogAdd = () => {
         }
     };
 
-    const handleBlogAdd = async (data) => {
+    const handleBlogUpdate = async (data) => {
 
         const formData = new FormData();
+        formData.append("id", id);
         formData.append("title", data.title);
         formData.append("tags", data.tags);
         formData.append("content", data.content);
-        formData.append("createuserid", localStorage.getItem("user"));
+        formData.append("updateuserid", localStorage.getItem("user"));
 
         if (data.image[0]) {
             formData.append("image", data.image[0]);
         }
 
-        const blogAddUrl = apiUrl + "/Blog/Add";
+        const blogAddUrl = apiUrl + "/Blog/Update";
         const blogAddOptions = {
-            method: "POST",
+            method: "PUT",
             headers: { },
             data: formData,
             showToast: true,
@@ -106,7 +128,7 @@ const BlogAdd = () => {
                     <div className="row">
                         <div className="col-12">
                             <div className="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 className="mb-sm-0">Blog Ekle</h4>
+                                <h4 className="mb-sm-0">Blog Düzenle</h4>
                             </div>
                         </div>
                     </div>
@@ -114,7 +136,8 @@ const BlogAdd = () => {
                         <div className="col-12">
                             <div className="card">
                                 <div className="card-body">
-                                    <form className="form-horizontal mt-3" onSubmit={handleSubmit(handleBlogAdd)}>
+
+                                    <form className="form-horizontal mt-3" onSubmit={handleSubmit(handleBlogUpdate)}>
                                         <div className="row mb-3">
                                             <label htmlFor="example-text-input"
                                                    className="col-sm-2 col-form-label">Başlık</label>
@@ -167,7 +190,7 @@ const BlogAdd = () => {
                                             </div>
                                         </div>
                                         {imageUrls.length > 0 && (
-                                            <div className="row">
+                                            <div className="row mb-3">
                                                 <label className="col-2 col-form-label">Yüklenen Görseller</label>
                                                 <div className="col-10 d-flex flex-wrap gap-3">
                                                     {imageUrls.map((url, index) => (
@@ -204,7 +227,7 @@ const BlogAdd = () => {
                                             <label className="col-sm-2 col-form-label">Görsel Yükle</label>
                                             <div className="col-sm-10">
                                                 <input className="form-control" type="file" accept="image/*"
-                                                       {...register('image', {required: 'Görsel gereklidir'})}
+                                                       {...register('image')}
                                                 />
                                                 {errors.image &&
                                                     <span style={{color: "red"}}>{errors.image.message}</span>}
@@ -247,4 +270,4 @@ const BlogAdd = () => {
     )
 }
 
-export default BlogAdd;
+export default BlogEdit;

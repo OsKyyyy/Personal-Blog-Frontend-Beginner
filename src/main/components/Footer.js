@@ -1,3 +1,5 @@
+import {NavLink} from "react-router-dom";
+
 const Footer = () => {
 
     return (
@@ -7,9 +9,8 @@ const Footer = () => {
                     <div className="row mb-5">
                         <div className="col-md">
                             <div className="ftco-footer-widget mb-4">
-                                <h2 className="ftco-heading-2">About</h2>
-                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                                    there live the blind texts.</p>
+                                <h2 className="ftco-heading-2">Hakkımda</h2>
+                                <p>Hakkımda</p>
                                 <ul className="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
                                     <li className="ftco-animate"><a href="#"><span className="icon-twitter"></span></a></li>
                                     <li className="ftco-animate"><a href="#"><span className="icon-facebook"></span></a>
@@ -21,52 +22,77 @@ const Footer = () => {
                         </div>
                         <div className="col-md">
                             <div className="ftco-footer-widget mb-4 ml-md-4">
-                                <h2 className="ftco-heading-2">Links</h2>
+                                <h2 className="ftco-heading-2">Sayfalar</h2>
                                 <ul className="list-unstyled">
-                                    <li><a href="#"><span className="icon-long-arrow-right mr-2"></span>Home</a></li>
-                                    <li><a href="#"><span className="icon-long-arrow-right mr-2"></span>About</a></li>
-                                    <li><a href="#"><span className="icon-long-arrow-right mr-2"></span>Services</a></li>
-                                    <li><a href="#"><span className="icon-long-arrow-right mr-2"></span>Projects</a></li>
-                                    <li><a href="#"><span className="icon-long-arrow-right mr-2"></span>Contact</a></li>
+                                    <li>
+                                        <NavLink activeClassName="active" to={'/'}>
+                                            <span className="icon-long-arrow-right mr-2"></span>Anasayfa
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink activeClassName="active" to={'/about'}>
+                                            <span className="icon-long-arrow-right mr-2"></span>Hakkımda
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink activeClassName="active" to={'/services'}>
+                                            <span className="icon-long-arrow-right mr-2"></span>Hizmetler
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink activeClassName="active" to={'/blog'}>
+                                            <span className="icon-long-arrow-right mr-2"></span>Blog
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink activeClassName="active" to={'/contact'}>
+                                            <span className="icon-long-arrow-right mr-2"></span>İletişim
+                                        </NavLink>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
                         <div className="col-md">
                             <div className="ftco-footer-widget mb-4">
-                                <h2 className="ftco-heading-2">Services</h2>
+                                <h2 className="ftco-heading-2">Hizmetler</h2>
                                 <ul className="list-unstyled">
                                     <li>
-                                        <a href="#"><span className="icon-long-arrow-right mr-2"></span>Web Design</a>
+                                        <a href="#"><span className="icon-long-arrow-right mr-2"></span>Web Tasarım</a>
                                     </li>
                                     <li>
-                                        <a href="#"><span className="icon-long-arrow-right mr-2"></span>Web Development</a>
+                                        <a href="#"><span className="icon-long-arrow-right mr-2"></span>Fotoğrafçılık</a>
                                     </li>
                                     <li>
-                                        <a href="#"><span className="icon-long-arrow-right mr-2"></span>Business Strategy</a>
+                                        <a href="#"><span className="icon-long-arrow-right mr-2"></span>Web Geliştirici</a>
                                     </li>
                                     <li>
-                                        <a href="#"><span className="icon-long-arrow-right mr-2"></span>Data Analysis</a>
+                                        <a href="#"><span className="icon-long-arrow-right mr-2"></span>Uygulama Geliştirme</a>
                                     </li>
                                     <li>
-                                        <a href="#"><span className="icon-long-arrow-right mr-2"></span>Graphic Design</a>
+                                        <a href="#"><span className="icon-long-arrow-right mr-2"></span>Markalaşma</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><span className="icon-long-arrow-right mr-2"></span>Ürün Stratejisi</a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                         <div className="col-md">
                             <div className="ftco-footer-widget mb-4">
-                                <h2 className="ftco-heading-2">Have a Questions?</h2>
+                                <h2 className="ftco-heading-2">İletişime Geç</h2>
                                 <div className="block-23 mb-3">
                                     <ul>
                                         <li>
                                             <span className="icon icon-map-marker"></span>
-                                            <span className="text">203 Fake St. Mountain View, San Francisco, California, USA</span>
+                                            <span className="text">Çankaya / ANKARA</span>
                                         </li>
                                         <li>
-                                            <a href="#"><span className="icon icon-phone"></span><span className="text">+2 392 3929 210</span></a>
+                                            <span className="icon icon-phone"></span>
+                                            <span className="text">+90 544 444 4444</span>
                                         </li>
                                         <li>
-                                            <a href="#"><span className="icon icon-envelope"></span><span className="text">info@yourdomain.com</span></a>
+                                            <span className="icon icon-envelope"></span>
+                                            <span className="text">info@personal-blog.com</span>
                                         </li>
                                     </ul>
                                 </div>

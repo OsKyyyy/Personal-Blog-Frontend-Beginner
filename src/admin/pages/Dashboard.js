@@ -24,11 +24,11 @@ const Dashboard = () =>{
                     <div className="row">
                         <div className="col-sm-6">
                             <script>document.write(new Date().getFullYear())</script>
-                            © Upcube.
+                            © Personal Blog.
                         </div>
                         <div className="col-sm-6">
                             <div className="text-sm-end d-none d-sm-block">
-                                Crafted with <i className="mdi mdi-heart text-danger"></i> by Themesdesign
+
                             </div>
                         </div>
                     </div>

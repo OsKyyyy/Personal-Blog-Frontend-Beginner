@@ -3,15 +3,17 @@ import useFetch from "../../hooks/useFetch";
 import AboutSection from "../components/about/AboutSection";
 import ResumeSection from "../components/about/ResumeSection";
 import SkillSection from "../components/about/SkillSection";
+import {useSelector} from "react-redux";
 
 const About = ({ counterFunction }) => {
 
+    const apiUrl = useSelector((state) => state.global.ApiUrl);
     const { data: aboutData, loading: aboutLoading, error: aboutError, fetchData: fetchAbout } = useFetch();
     const { data: resumeData, loading: resumeLoading, error: resumeError, fetchData: fetchResume } = useFetch();
 
     useEffect(() => {
-        fetchAbout("https://localhost:44352/api/About/List");
-        fetchResume("https://localhost:44352/api/Resume/List");
+        fetchAbout(apiUrl + "/About/List");
+        fetchResume(apiUrl + "/Resume/List");
     }, []);
 
     useEffect(() => {

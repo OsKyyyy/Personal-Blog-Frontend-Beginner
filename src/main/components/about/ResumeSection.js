@@ -37,11 +37,6 @@ const ResumeSection = ({data}) => {
                         <p>Veri Yok!</p>
                     )}
                 </div>
-                <div className="row justify-content-center mt-5">
-                    <div className="col-md-6 text-center ">
-                        <p><button onClick={downloadPDF} className="btn btn-primary py-4 px-5">ÖZGEÇMİŞ İNDİR</button></p>
-                    </div>
-                </div>
             </div>
         </section>
     )

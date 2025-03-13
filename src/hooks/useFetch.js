@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/reducers/authSlice";
@@ -24,7 +24,6 @@ const useFetch = () => {
                 url,
                 method: options.method || "GET",
                 headers: {
-                    "Content-Type": "application/json",
                     Authorization: token ? `Bearer ${token}` : "",
                     ...options.headers
                 },
@@ -34,25 +33,23 @@ const useFetch = () => {
             setData(response.data);
             setError(null);
 
-            if (options.showToast && response.data.status) {
-                toast.success(response.data.message || "İşlem başarılı!");
+            if (options.showToast && response.data.Status || response.data.status) {
+                toast.success(response.data.Message || response.data.message);
+                if (options.loadComponent) {
+                    navigate(`/${options.loadComponent}`);
+                }
             }
 
         } catch (err) {
-            console.error("API Error:", err);
-
-            // 401 Unauthorized hatası durumu
             if (err.response?.status === 401) {
                 dispatch(logout());
                 localStorage.removeItem("token");
                 navigate("/login");
             } else {
-                // ❌ Diğer hata durumlarında error mesajı göster
-                console.log("buraya girdi");
-                toast.error(err.response?.data?.message || "Beklenmeyen bir hata oluştu!");
+                toast.error(err.response?.data?.Message || "Beklenmeyen bir hata oluştu!");
             }
 
-            setError(err.response?.data?.message || err.message);
+            setError(err.response?.data?.Message || err.message);
         } finally {
             setLoading(false);
         }

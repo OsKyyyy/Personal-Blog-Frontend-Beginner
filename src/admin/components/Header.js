@@ -6,6 +6,7 @@ import avatar1 from "../../assets/admin/images/users/avatar-1.jpg";
 
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
+import {Link} from "react-router-dom";
 
 const Header = () => {
     return (
@@ -56,13 +57,6 @@ const Header = () => {
                                 </div>
                             </form>
                         </div>
-                    </div>
-
-                    <div className="dropdown d-none d-lg-inline-block ms-1">
-                        <button type="button" className="btn header-item noti-icon waves-effect"
-                                data-toggle="fullscreen">
-                            <i className="ri-fullscreen-line"></i>
-                        </button>
                     </div>
 
                     <div className="dropdown d-inline-block">
@@ -144,9 +138,9 @@ const Header = () => {
                                 <i className="ri-settings-2-line align-middle me-1"></i> Ayarlar
                             </a>
                             <div className="dropdown-divider"></div>
-                            <a className="dropdown-item text-danger" href="#">
+                            <Link to="/logout" className="dropdown-item text-danger">
                                 <i className="ri-shut-down-line align-middle me-1 text-danger"></i> Çıkış
-                            </a>
+                            </Link>
                         </div>
                     </div>
 

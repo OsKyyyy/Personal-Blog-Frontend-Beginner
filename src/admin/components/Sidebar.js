@@ -34,12 +34,40 @@ const Sidebar = () => {
                             </NavLink>
                         </li>
                         <li>
+                            <NavLink to="/admin/comment" className="waves-effect">
+                                <i className="ri-message-2-line"></i>
+                                <span>Yorumlar</span>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/admin/contact" className="waves-effect">
+                                <i className="ri-mail-send-line"></i>
+                                <span>İletişme Geçenler</span>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/admin/about" className="waves-effect">
+                                <i className="ri-edit-2-line"></i>
+                                <span>Hakkımda</span>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <Link to="#" className="has-arrow waves-effect">
+                                <i className="ri-file-paper-2-line"></i>
+                                <span>Özgeçmiş</span>
+                            </Link>
+                            <ul style={{paddingLeft: "2rem"}}>
+                                <li><NavLink to="/admin/resume/add">Özgeçmiş Ekle</NavLink></li>
+                                <li><NavLink to="/admin/resume/list">Özgeçmiş Listesi</NavLink></li>
+                            </ul>
+                        </li>
+                        <li>
                             <Link to="#" className="has-arrow waves-effect">
                                 <i className="ri-newspaper-line"></i>
                                 <span>Blog</span>
                             </Link>
-                            <ul style={{ paddingLeft: "2rem"}}>
-                                <li><NavLink to="/admin/blog/add">Blg Ekle</NavLink></li>
+                            <ul style={{paddingLeft: "2rem"}}>
+                                <li><NavLink to="/admin/blog/add">Blog Ekle</NavLink></li>
                                 <li><NavLink to="/admin/blog/list">Blog Listesi</NavLink></li>
                             </ul>
                         </li>

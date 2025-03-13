@@ -1,5 +1,5 @@
 import {Navigate, Route, Routes} from "react-router-dom";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {useSelector} from "react-redux";
 import Header from "./components/Header"
 import Dashboard from "./pages/Dashboard";
@@ -9,6 +9,13 @@ import BlogAdd from "./pages/BlogAdd";
 import useCustomFunctions from "../assets/admin/js/admin";
 import Waves from "node-waves";
 import 'node-waves/dist/waves.min.css';
+import BlogEdit from "./pages/BlogEdit";
+import About from "./pages/About";
+import ResumeAdd from "./pages/ResumeAdd";
+import ResumeList from "./pages/ResumeList";
+import ResumeEdit from "./pages/ResumeEdit";
+import Contact from "./pages/Contact";
+import Comment from "./pages/Comment";
 
 const AdminApp = () => {
 
@@ -46,7 +53,16 @@ const AdminApp = () => {
             </aside>
             <Routes>
                 <Route path="/dashboard" element={<Dashboard/>}/>
+                <Route path="/comment" element={<Comment/>}/>
+                <Route path="/contact" element={<Contact/>}/>
+                <Route path="/about" element={<About/>}/>
+                <Route path="/resume/add" element={<ResumeAdd/>}/>
+                <Route path="/resume/edit/:id" element={<ResumeEdit/>}/>
+                <Route path="/resume/edit" element={<Navigate to="/admin/resume/list" />}/>
+                <Route path="/resume/list" element={<ResumeList/>}/>
                 <Route path="/blog/add" element={<BlogAdd/>}/>
+                <Route path="/blog/edit/:id" element={<BlogEdit/>}/>
+                <Route path="/blog/edit" element={<Navigate to="/admin/blog/list" />}/>
                 <Route path="/blog/list" element={<BlogList/>}/>
             </Routes>
         </div>

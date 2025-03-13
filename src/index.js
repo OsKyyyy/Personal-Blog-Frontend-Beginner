@@ -9,6 +9,7 @@ import Login from "./auth/Login";
 import Store from "./redux/reducers/store";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Logout from "./auth/Logout";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -29,6 +30,11 @@ root.render(
             <Route path="/login" element={
                 <Provider store={Store}>
                     <Login />
+                </Provider>
+            }/>
+            <Route path="/logout" element={
+                <Provider store={Store}>
+                    <Logout />
                 </Provider>
             }/>
         </Routes>

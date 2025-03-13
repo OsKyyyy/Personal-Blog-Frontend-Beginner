@@ -1,43 +1,33 @@
 import React, {useEffect, useMemo, useState} from "react";
-import { Link } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
-import DataTable from "react-data-table-component";
 import {useSelector} from "react-redux";
-import {Button, Image} from "react-bootstrap";
+import useFetch from "../../hooks/useFetch";
+import {Button} from "react-bootstrap";
+import {Link} from "react-router-dom";
+import DataTable from "react-data-table-component";
 
-const BlogList = () => {
-
+const ResumeList = () => {
     const apiUrl = useSelector((state) => state.global.ApiUrl);
-    const imageUrl = useSelector((state) => state.global.ImageUrl);
+    const {data, loading, fetchData} = useFetch();
+    const {fetchData: fetchDelete} = useFetch();
     const [tableData, setTableData] = useState([]);
     const [filterText, setFilterText] = useState('');
     const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
-    const {data: blogListData, loading: blogListLoading,fetchData} = useFetch();
-    const {data: dataDelete, fetchData: fetchDelete } = useFetch();
 
     const columns = [
         { name: "ID", selector: row => row.id, omit: true },
-        {
-            name: "Görsel",
-            width: "100px",
-            cell: row => <Image src={`${imageUrl}${row.image}`} width="50" height="50"/>
-        },
         { name: "Başlık", selector: row => row.title, sortable: true, width:"200px" },
-        { name: "İçerik", selector: row => row.content, sortable: true, width:"200px" },
-        {
-            name: "Url",
-            width:"150px",
-            selector: row => row.slug,
-            cell: row => <a href={`/blogdetail/${row.slug}`} target="_blank">{row.slug}</a>
-        },
+        { name: "Açıklama", selector: row => row.description, sortable: true, width:"200px" },
+        { name: "Organizasyon", selector: row => row.organization, sortable: true },
+        { name: "Devam Ediyor", selector: row => row.currentPosition, sortable: true, width:"150px", cell: row => row.currentPosition ? "Evet" : "Hayır" },
+        { name: "Başlangıç Tarihi", selector: row => row.startDate, sortable: true },
+        { name: "Bitiş Tarihi", selector: row => row.endDate, sortable: true },
         { name: "Oluşturulma Tarihi", selector: row => row.createDate, sortable: true },
-        { name: "Oluşturan Kullanıcı", selector: row => row.createUser, sortable: true },
         {
             name: "İşlemler",
             cell: row =>
                 <>
-                    <Link to={`/admin/blog/edit/${row.id}`} className="btn btn-primary me-2"><i className="fas fa-pen"></i> Düzenle</Link>
-                    <Button className="btn btn-danger" onClick={() => deleteBlog(row.id)}><i className="fas fa-times"></i> Sil</Button>
+                    <Link to={`/admin/resume/edit/${row.id}`} className="btn btn-primary me-2"><i className="fas fa-pen"></i> Düzenle</Link>
+                    <Button className="btn btn-danger" onClick={() => deleteResume(row.id)}><i className="fas fa-times"></i> Sil</Button>
                 </>
         }
     ];
@@ -71,43 +61,47 @@ const BlogList = () => {
         },
     }
 
-    const deleteBlog = async (blogId) => {
+    const deleteResume = async (resumeId) => {
 
-        const deleteUrl = apiUrl + "/Blog/Delete?id=" + blogId;
+        const deleteUrl = apiUrl + "/Resume/Delete?id=" + resumeId;
         const deleteUrlOptions = {
             method: "DELETE",
             showToast: true,
-            loadComponent: "admin/blog/list"
+            loadComponent: "admin/resume/list"
         };
         await fetchDelete(deleteUrl, deleteUrlOptions);
 
-        setTableData(tableData.filter(blog => blog.id !== blogId));
+        setTableData(tableData.filter(resume => resume.id !== resumeId));
     }
 
     useEffect(() => {
-        fetchData(apiUrl + "/Blog/List");
+        fetchData(apiUrl + "/Resume/List");
     }, []);
 
     useEffect(() => {
-        if (blogListData?.Data) {
-            const formattedData = blogListData.Data.map(item => ({
+        if (data?.Data) {
+            const formattedData = data.Data.map(item => ({
                 id: item.Id,
                 title: item.Title,
-                content: item.Content,
-                image: item.Image,
-                slug: item.Slug,
+                description: item.Description,
+                organization: item.Organization,
+                currentPosition: item.CurrentPosition,
+                startDate: item.StartDate,
+                endDate: item.EndDate,
                 createDate: item.CreateDate,
                 createUser: item.CreateUser
             }));
             setTableData(formattedData);
         }
-    }, [blogListData]);
+    }, [data]);
 
     const filteredItems = tableData.filter(
         item =>
             (item.title && item.title.toLowerCase().includes(filterText.toLowerCase())) ||
-            (item.content && item.content.toLowerCase().includes(filterText.toLowerCase())) ||
-            (item.slug && item.slug.toLowerCase().includes(filterText.toLowerCase())) ||
+            (item.description && item.description.toLowerCase().includes(filterText.toLowerCase())) ||
+            (item.organization && item.organization.toLowerCase().includes(filterText.toLowerCase())) ||
+            (item.startDate && item.startDate.toLowerCase().includes(filterText.toLowerCase())) ||
+            (item.endDate && item.endDate.toLowerCase().includes(filterText.toLowerCase())) ||
             (item.createDate && item.createDate.toLowerCase().includes(filterText.toLowerCase())) ||
             (item.createUser && item.createUser.toLowerCase().includes(filterText.toLowerCase()))
     );
@@ -128,7 +122,7 @@ const BlogList = () => {
         );
     }, [filterText, resetPaginationToggle]);
 
-    if (blogListLoading) {
+    if (loading) {
         return (
             <div className="main-content">
                 <div className="page-content">
@@ -155,7 +149,7 @@ const BlogList = () => {
                     <div className="row">
                         <div className="col-12">
                             <div className="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 className="mb-sm-0">BLOG LİSTESİ</h4>
+                                <h4 className="mb-sm-0">ÖZGEÇMİŞ LİSTESİ</h4>
                             </div>
                         </div>
                     </div>
@@ -163,10 +157,9 @@ const BlogList = () => {
                         <div className="col-12">
                             <div className="card">
                                 <div className="card-body">
-
                                     <DataTable
                                         className="table  dt-responsive nowrap"
-                                        style={{borderCollapse: "collapse", borderSpacing: "0", width:"100%"}}
+                                        style={{borderCollapse: "collapse", borderSpacing: "0", width: "100%"}}
                                         columns={columns}
                                         data={filteredItems}
                                         pagination
@@ -188,9 +181,9 @@ const BlogList = () => {
             <footer className="footer">
                 <div className="container-fluid">
                     <div className="row">
-                    <div className="col-sm-6">
+                        <div className="col-sm-6">
                             <script>document.write(new Date().getFullYear())</script>
-                        © Personal Blog.
+                            © Personal Blog.
                         </div>
                         <div className="col-sm-6">
                             <div className="text-sm-end d-none d-sm-block">
@@ -200,7 +193,6 @@ const BlogList = () => {
                 </div>
             </footer>
         </div>
-    );
+    )
 }
-
-export default BlogList;
+export default ResumeList;
